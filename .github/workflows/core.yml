@@ -146,7 +146,7 @@ jobs:
 
       - name: Set current ref as env variable
         run: |
-          echo "GIT_DESC=$(git log -1 --format=%cd.%h --date=format:%Y-%m-%d_%H:%M:%S)" >> $GITHUB_ENV
+          echo "GIT_DESC=2026-01-31_15:42:18.ffffffff" >> "$GITHUB_ENV"
 
       - name: Download web artifact
         uses: actions/download-artifact@v4
