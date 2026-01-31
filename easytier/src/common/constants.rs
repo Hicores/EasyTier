@@ -36,4 +36,4 @@ pub const UDP_HOLE_PUNCH_CONNECTOR_SERVICE_ID: u32 = 2;
 
 pub const WIN_SERVICE_WORK_DIR_REG_KEY: &str = "SOFTWARE\\EasyTier\\Service\\WorkDir";
 
-pub const EASYTIER_VERSION: &str = "9.9.9";
+pub const EASYTIER_VERSION: &str = "至尊ProMaxUltra版";
