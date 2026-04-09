@@ -83,6 +83,7 @@ show_vpn_portal_config: 显示VPN门户配置
 vpn_portal_config: VPN门户配置
 show_event_log: 显示事件日志
 event_log: 事件日志
+network_traffic_by_name: 按网络名称统计的累计流量
 peer_info: 节点信息
 hostname: 主机名
 route_cost: 路由
@@ -212,6 +213,7 @@ status:
   local: 本机
   server: 服务器
   relay: 中继
+  unknown_network: 未知网络
 
 run_network: 运行网络
 stop_network: 停止网络

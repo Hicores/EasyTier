@@ -284,6 +284,7 @@ export interface PeerConnInfo {
   my_peer_id: number
   is_client: boolean
   peer_id: number
+  network_name: string
   features: string[]
   tunnel?: TunnelInfo
   stats?: PeerConnStats
