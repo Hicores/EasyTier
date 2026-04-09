@@ -141,6 +141,36 @@ const myNodeInfo = computed(() => {
   return props.curNetworkInst.detail?.my_node_info
 })
 
+interface NetworkTrafficRow {
+  network_name: string
+  tx_bytes: number
+  rx_bytes: number
+}
+
+const networkTrafficRows = computed<NetworkTrafficRow[]>(() => {
+  const rows = new Map<string, NetworkTrafficRow>()
+  const peers = props.curNetworkInst?.detail?.peers || []
+
+  for (const peer of peers) {
+    for (const conn of peer.conns || []) {
+      const networkName = conn.network_name || t('status.unknown_network')
+      const row = rows.get(networkName) || {
+        network_name: networkName,
+        tx_bytes: 0,
+        rx_bytes: 0,
+      }
+
+      row.tx_bytes += conn.stats?.tx_bytes || 0
+      row.rx_bytes += conn.stats?.rx_bytes || 0
+      rows.set(networkName, row)
+    }
+  }
+
+  return Array.from(rows.values()).sort((a, b) => {
+    return (b.tx_bytes + b.rx_bytes) - (a.tx_bytes + a.rx_bytes)
+  })
+})
+
 interface Chip {
   label: string
   icon: string
@@ -416,6 +446,29 @@ function showEventLogs() {
       </Card>
 
       <Divider />
+
+      <Card v-if="networkTrafficRows.length > 0">
+        <template #title>
+          {{ t('network_traffic_by_name') }}
+        </template>
+        <template #content>
+          <DataTable :value="networkTrafficRows" table-class="w-full">
+            <Column field="network_name" :header="t('network_name')" />
+            <Column :header="t('upload_bytes')">
+              <template #body="slotProps">
+                {{ humanFileSize(slotProps.data.tx_bytes) }}
+              </template>
+            </Column>
+            <Column :header="t('download_bytes')">
+              <template #body="slotProps">
+                {{ humanFileSize(slotProps.data.rx_bytes) }}
+              </template>
+            </Column>
+          </DataTable>
+        </template>
+      </Card>
+
+      <Divider v-if="networkTrafficRows.length > 0" />
 
       <Card>
         <template #title>

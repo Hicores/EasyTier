@@ -82,6 +82,7 @@ show_vpn_portal_config: Show VPN Portal Config
 vpn_portal_config: VPN Portal Config
 show_event_log: Show Event Log
 event_log: Event Log
+network_traffic_by_name: Cumulative Traffic by Network Name
 peer_info: Peer Info
 route_cost: Route Cost
 tunnel_proto: Protocol
@@ -212,6 +213,7 @@ status:
   local: Local
   server: Server
   relay: Relay
+  unknown_network: Unknown Network
 
 run_network: Run Network
 stop_network: Stop Network
